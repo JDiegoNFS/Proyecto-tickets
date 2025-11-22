@@ -1,0 +1,463 @@
+/* Solución directa - estilos específicos por tema */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.page-title {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-inverse);
+    z-index: 3;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.page-title::before {
+    content: "🎫";
+    font-size: 2rem;
+}
+
+/* Centrado del login */
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+/* Tarjeta - Temas claros */
+.login-container {
+    background: #ffffff;
+    backdrop-filter: var(--backdrop-blur);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 0.6s ease-out;
+    box-sizing: border-box;
+    border: 1px solid var(--border-light);
+}
+
+/* Tarjeta - Tema oscuro */
+[data-theme="dark"] .login-container {
+    background: #2c3e50;
+    border-color: #4a5f7a;
+}
+
+/* Tarjeta - Tema ejecutivo */
+[data-theme="executive"] .login-container {
+    background: #1c1c1c;
+    border-color: #495057;
+}
+
+/* Etiquetas */
+.login-container label {
+    display: block;
+    margin: 12px 0 5px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Inputs */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 18px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+    background-color: #f8f9fa;
+}
+
+.login-container input:focus {
+    border-color: #0077b6;
+    box-shadow: 0 0 6px rgba(0, 119, 182, 0.3);
+    background-color: #fff;
+}
+
+/* Botón */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #0077b6;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-container button:hover {
+    background-color: #023e8a;
+    transform: translateY(-2px);
+}
+
+/* Error */
+.login-container .error {
+    color: #d90429;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Animación fade */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    animation: fadeIn 0.6s ease-out;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Título - Temas claros */
+.login-container h2 {
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Título - Temas oscuros */
+[data-theme="dark"] .login-container h2,
+[data-theme="executive"] .login-container h2 {
+    color: #ffffff;
+}
+
+.login-container h2::before {
+    content: "🔐";
+    font-size: 1.5rem;
+}
+
+/* Input group - Temas claros */
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 12px 15px;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* Input group - Tema oscuro (mantener fondo claro para legibilidad) */
+[data-theme="dark"] .input-group {
+    background: #ffffff;
+    border-color: #5dade2;
+    box-shadow: 0 2px 8px rgba(93, 173, 226, 0.1);
+}
+
+/* Input group - Tema ejecutivo (mantener fondo claro para legibilidad) */
+[data-theme="executive"] .input-group {
+    background: #ffffff;
+    border-color: #9b59b6;
+    box-shadow: 0 2px 8px rgba(155, 89, 182, 0.1);
+}
+
+.input-group:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Focus específico para temas oscuros */
+[data-theme="dark"] .input-group:focus-within {
+    border-color: #5dade2;
+    box-shadow: 0 0 0 3px rgba(93, 173, 226, 0.2);
+}
+
+[data-theme="executive"] .input-group:focus-within {
+    border-color: #9b59b6;
+    box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+}
+
+/* Iconos - Temas claros */
+.input-group i {
+    margin-right: 12px;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+/* Iconos - Temas oscuros (iconos oscuros en inputs claros) */
+[data-theme="dark"] .input-group i,
+[data-theme="executive"] .input-group i {
+    color: #7f8c8d;
+}
+
+/* Input text - Temas claros */
+.input-group input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    font-size: 1rem;
+    outline: none;
+    color: #2c3e50;
+}
+
+/* Input text - Temas oscuros (texto oscuro en fondo claro) */
+[data-theme="dark"] .input-group input,
+[data-theme="executive"] .input-group input {
+    color: #2c3e50;
+}
+
+/* Placeholders - Temas claros */
+.input-group input::placeholder {
+    color: #95a5a6;
+}
+
+/* Placeholders - Temas oscuros (placeholders oscuros en inputs claros) */
+[data-theme="dark"] .input-group input::placeholder,
+[data-theme="executive"] .input-group input::placeholder {
+    color: #95a5a6;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+/* Options - Temas claros */
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #7f8c8d;
+    cursor: pointer;
+}
+
+/* Options - Temas oscuros */
+[data-theme="dark"] .options label,
+[data-theme="executive"] .options label {
+    color: #bdc3c7;
+}
+
+.options input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.options a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.options a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: var(--text-inverse);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
+
+.login-container button::before {
+    content: "🚀";
+    font-size: 1.2rem;
+}
+
+.login-container button:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+}
+
+/* Register link - Temas claros */
+.register-link {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Register link - Temas oscuros */
+[data-theme="dark"] .register-link,
+[data-theme="executive"] .register-link {
+    color: #bdc3c7;
+}
+
+.register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.register-link a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Toggle password - Temas claros */
+.toggle-password {
+    cursor: pointer;
+    color: #7f8c8d;
+    margin-left: 8px;
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* Toggle password - Temas oscuros (icono oscuro en input claro) */
+[data-theme="dark"] .toggle-password,
+[data-theme="executive"] .toggle-password {
+    color: #7f8c8d;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 40px; /* espacio para el icono */
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+}
+
+
+.login-container .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    font-weight: 600;
+    border: 1px solid #f5c6cb;
+    animation: shake 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-container .error::before {
+    content: "⚠️";
+    font-size: 1.2rem;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0px); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .page-title {
+        top: 20px;
+        left: 20px;
+        font-size: 2rem;
+    }
+    
+    .login-wrapper {
+        padding: 20px;
+    }
+    
+    .login-container {
+        padding: 30px 25px;
+        max-width: 100%;
+    }
+    
+    .login-container h2 {
+        font-size: 1.8rem;
+    }
+    
+    .options {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .login-container {
+        padding: 25px 20px;
+    }
+    
+    .input-group {
+        padding: 10px 12px;
+    }
+    
+    .login-container button {
+        padding: 12px;
+        font-size: 1rem;
+    }
+}

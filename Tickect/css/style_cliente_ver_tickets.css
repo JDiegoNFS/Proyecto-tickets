@@ -1,0 +1,1284 @@
+/* Variables CSS para colores y estilos consistentes */
+:root {
+    --primary-color: #4a90e2;
+    --primary-hover: #357abd;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --border-color: #dee2e6;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+    
+    /* Colores específicos para estados de tickets */
+    --estado-pendiente: #ffc107;
+    --estado-pendiente-bg: #fff3cd;
+    --estado-pendiente-text: #856404;
+    
+    --estado-abierto: #17a2b8;
+    --estado-abierto-bg: #d1ecf1;
+    --estado-abierto-text: #0c5460;
+    
+    --estado-en-proceso: #007bff;
+    --estado-en-proceso-bg: #cce7ff;
+    --estado-en-proceso-text: #004085;
+    
+    --estado-cerrado: #28a745;
+    --estado-cerrado-bg: #d4edda;
+    --estado-cerrado-text: #155724;
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Contenedor principal */
+.page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header section */
+.header-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-left h1 {
+    color: var(--dark-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-left p {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.breadcrumbs a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+    color: var(--border-color);
+}
+
+/* Stats Dashboard */
+.stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.stat-icon i {
+    font-size: 1.5rem !important;
+    color: white !important;
+}
+
+.stat-pendiente .stat-icon {
+    background: linear-gradient(135deg, var(--estado-pendiente), #e0a800);
+}
+
+.stat-en-proceso .stat-icon {
+    background: linear-gradient(135deg, var(--estado-en-proceso), #0056b3);
+}
+
+.stat-cerrado .stat-icon {
+    background: linear-gradient(135deg, var(--estado-cerrado), #1e7e34);
+}
+
+.stat-content {
+    text-align: left;
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* CORRECCIONES PARA FILTROS - ELIMINAR LÍNEAS DE ENLACES */
+/* Hacer que los enlaces se comporten como divs */
+a.stat-filter,
+a.stat-card {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block !important;
+    border: none !important;
+    outline: none !important;
+    text-decoration-line: none !important;
+    text-decoration-style: none !important;
+    text-decoration-color: transparent !important;
+    text-underline-offset: 0 !important;
+    text-decoration-thickness: 0 !important;
+    text-decoration-skip-ink: none !important;
+    text-underline-position: auto !important;
+}
+
+/* Eliminar líneas de todos los elementos dentro de enlaces */
+a.stat-filter *,
+a.stat-card *,
+a.stat-filter:link *,
+a.stat-filter:visited *,
+a.stat-filter:hover *,
+a.stat-filter:active *,
+a.stat-filter:focus * {
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+    text-decoration-line: none !important;
+    text-decoration-style: none !important;
+    text-decoration-color: transparent !important;
+    text-underline-offset: 0 !important;
+    text-decoration-thickness: 0 !important;
+    color: inherit !important;
+    background: inherit !important;
+}
+
+/* RESTAURAR COLORES Y POSICIÓN DE ICONOS */
+/* Icono específico para "Todos" - COLOR VISIBLE */
+.stat-filter.stat-todos .stat-icon i,
+.stat-card.stat-todos .stat-icon i {
+    color: white !important; /* Color blanco para que se vea en fondo oscuro */
+    display: inline-block !important;
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Restaurar colores de fondo de iconos */
+.stat-filter.stat-todos .stat-icon {
+    background: linear-gradient(135deg, #6c757d, #5a6268) !important;
+}
+
+.stat-filter.stat-pendiente .stat-icon {
+    background: linear-gradient(135deg, var(--estado-pendiente), #e0a800) !important;
+}
+
+.stat-filter.stat-en-proceso .stat-icon {
+    background: linear-gradient(135deg, var(--estado-en-proceso), #0056b3) !important;
+}
+
+.stat-filter.stat-cerrado .stat-icon {
+    background: linear-gradient(135deg, var(--estado-cerrado), #1e7e34) !important;
+}
+
+/* Restaurar colores de iconos */
+.stat-filter.stat-pendiente .stat-icon i,
+.stat-filter.stat-en-proceso .stat-icon i,
+.stat-filter.stat-cerrado .stat-icon i {
+    color: white !important;
+}
+
+/* LAYOUT IDÉNTICO A LA VISTA DE USUARIO */
+/* Asegurar que los iconos mantengan su posición original como en vista usuario */
+.stat-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    flex-direction: row !important;
+    text-align: center !important;
+}
+
+.stat-icon {
+    flex-shrink: 0 !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.5rem !important;
+    color: white !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.stat-content {
+    text-align: left !important;
+    flex: 1 !important;
+}
+
+.stat-number {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: var(--dark-color) !important;
+    margin-bottom: 5px !important;
+    line-height: 1 !important;
+}
+
+.stat-label {
+    color: var(--secondary-color) !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 !important;
+}
+
+/* Estilos específicos para cada tipo de filtro */
+.stat-filter.stat-todos {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+}
+
+.stat-filter.stat-todos:hover {
+    background: linear-gradient(135deg, #5a6268, #495057);
+    box-shadow: 0 8px 25px rgba(108, 117, 125, 0.2);
+}
+
+.stat-filter.stat-pendiente:hover {
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
+}
+
+.stat-filter.stat-en-proceso:hover {
+    box-shadow: 0 8px 25px rgba(23, 162, 184, 0.3);
+}
+
+.stat-filter.stat-cerrado:hover {
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+/* Estado Activo para Filtros */
+.stat-filter.active {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    border: 2px solid #007bff;
+}
+
+.stat-filter.active::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #007bff;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Tickets Container */
+.tickets-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.page-title {
+    color: var(--dark-color);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.page-title i {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+/* Tabla de tickets */
+.table-container {
+    overflow-x: auto;
+}
+
+.tickets-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+    table-layout: fixed;
+    position: relative;
+}
+
+.tickets-table::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px 12px 0 0;
+    z-index: 0;
+}
+
+.tickets-table th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    padding: 15px 10px;
+    text-align: center;
+    border: none;
+    border-radius: 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0;
+}
+
+.tickets-table th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+.tickets-table th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+.tickets-table th::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.tickets-table th:hover {
+    background: linear-gradient(135deg, #7c4dff 0%, #8e24aa 100%) !important;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.tickets-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+/* Anchos específicos para cada columna */
+.tickets-table th:nth-child(1), .tickets-table td:nth-child(1) { 
+    width: 60px !important; 
+} 
+.tickets-table th:nth-child(2), .tickets-table td:nth-child(2) { 
+    width: 120px !important; 
+} 
+.tickets-table th:nth-child(3), .tickets-table td:nth-child(3) { 
+    width: 100px !important; 
+} 
+.tickets-table th:nth-child(4), .tickets-table td:nth-child(4) { 
+    width: 200px !important; 
+} 
+.tickets-table th:nth-child(5), .tickets-table td:nth-child(5) { 
+    width: 100px !important; 
+} 
+.tickets-table th:nth-child(6), .tickets-table td:nth-child(6) { 
+    width: 120px !important; 
+} 
+.tickets-table th:nth-child(7), .tickets-table td:nth-child(7) { 
+    width: 120px !important; 
+} 
+.tickets-table th:nth-child(8), .tickets-table td:nth-child(8) { 
+    width: 100px !important; 
+}
+.tickets-table th:nth-child(9), .tickets-table td:nth-child(9) { 
+    width: 80px !important; 
+}
+
+.tickets-table tbody tr {
+    transition: var(--transition);
+}
+
+.tickets-table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.01);
+}
+
+/* Estados de tickets con colores */
+.ticket-pendiente td:first-child {
+    position: relative;
+}
+
+.ticket-pendiente td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #ffc107;
+}
+
+.ticket-en_proceso td:first-child {
+    position: relative;
+}
+
+.ticket-en_proceso td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #007bff;
+}
+
+.ticket-cerrado td:first-child {
+    position: relative;
+}
+
+.ticket-cerrado td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #28a745;
+}
+
+/* Elementos de la tabla */
+.ticket-number {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.ticket-asunto {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.ticket-asunto i {
+    color: var(--primary-color);
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.ticket-departamento {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.ticket-departamento i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+/* Descripción con tooltip */
+.ticket-descripcion {
+    position: relative;
+    max-width: 250px;
+}
+
+.descripcion-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 40px;
+    line-height: 1.4;
+}
+
+.descripcion-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: var(--dark-color);
+    color: white;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    white-space: normal;
+    width: 300px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.ticket-descripcion:hover .descripcion-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estados badges */
+.estado-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.estado-pendiente {
+    background-color: var(--estado-pendiente-bg);
+    color: var(--estado-pendiente-text);
+}
+
+.estado-en_proceso {
+    background-color: var(--estado-en-proceso-bg);
+    color: var(--estado-en-proceso-text);
+}
+
+.estado-cerrado {
+    background-color: var(--estado-cerrado-bg);
+    color: var(--estado-cerrado-text);
+}
+
+/* Usuario asignado */
+.usuario-asignado {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.usuario-asignado i {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+}
+
+/* Fecha */
+.fecha-info {
+    text-align: center;
+}
+
+.fecha-dia {
+    font-weight: 600;
+    color: var(--dark-color);
+    font-size: 0.9rem;
+}
+
+.fecha-hora {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+}
+
+/* Botones de acción */
+.acciones-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-action:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-responder {
+    background: linear-gradient(135deg, var(--success-color), #1e7e34);
+}
+
+.btn-responder:hover {
+    background: linear-gradient(135deg, #1e7e34, var(--success-color));
+}
+
+.btn-historial {
+    background: linear-gradient(135deg, var(--info-color), #138496);
+}
+
+.btn-historial:hover {
+    background: linear-gradient(135deg, #138496, var(--info-color));
+}
+
+.btn-editar {
+    background: linear-gradient(135deg, var(--warning-color), #e0a800);
+}
+
+.btn-editar:hover {
+    background: linear-gradient(135deg, #e0a800, var(--warning-color));
+}
+
+/* Estilos para las columnas de usuario creador y asignado */
+.ticket-creador {
+    min-width: 140px;
+}
+
+.ticket-usuario {
+    min-width: 140px;
+}
+
+.usuario-creador {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1565c0;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #90caf9;
+    white-space: nowrap;
+}
+
+.usuario-creador i {
+    color: #1976d2;
+}
+
+.usuario-asignado {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px;
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    color: #7b1fa2;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #ce93d8;
+    white-space: nowrap;
+}
+
+.usuario-asignado i {
+    color: #8e24aa;
+}
+
+.sin-creador {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px;
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+    color: #c62828;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #ef9a9a;
+    white-space: nowrap;
+}
+
+.sin-creador i {
+    color: #d32f2f;
+}
+
+.sin-asignar {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px;
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    color: #ef6c00;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #ffcc02;
+    white-space: nowrap;
+}
+
+.sin-asignar i {
+    color: #f57c00;
+}
+
+/* Estado vacío */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--secondary-color);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--border-color);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.empty-state p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color), #1e7e34);
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #1e7e34, var(--success-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #5a6268, #6c757d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .page-container {
+        padding: 15px;
+    }
+    
+    .header-section,
+    .tickets-container {
+        padding: 25px;
+    }
+    
+    .stats-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .page-container {
+        padding: 15px;
+    }
+    
+    .header-section,
+    .tickets-container {
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .stats-dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .tickets-table {
+        font-size: 0.9rem;
+    }
+    
+    .tickets-table th,
+    .tickets-table td {
+        padding: 10px 8px;
+    }
+    
+    /* Ajustar anchos de columnas en móviles */
+    .tickets-table th:nth-child(1), .tickets-table td:nth-child(1) { width: 60px; } /* ID */
+    .tickets-table th:nth-child(2), .tickets-table td:nth-child(2) { width: 120px; } /* Asunto */
+    .tickets-table th:nth-child(3), .tickets-table td:nth-child(3) { width: 100px; } /* Departamento */
+    .tickets-table th:nth-child(4), .tickets-table td:nth-child(4) { width: 200px; } /* Descripción */
+    .tickets-table th:nth-child(5), .tickets-table td:nth-child(5) { width: 100px; } /* Estado */
+    .tickets-table th:nth-child(6), .tickets-table td:nth-child(6) { width: 110px; } /* Usuario */
+    .tickets-table th:nth-child(7), .tickets-table td:nth-child(7) { width: 100px; } /* Fecha */
+    .tickets-table th:nth-child(8), .tickets-table td:nth-child(8) { width: 80px; } /* Acciones */
+    
+    .descripcion-tooltip {
+        width: 250px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .header-right {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-section,
+    .tickets-container {
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .header-left h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-dashboard {
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .tickets-table {
+        font-size: 0.8rem;
+    }
+    
+    .tickets-table th,
+    .tickets-table td {
+        padding: 8px 6px;
+    }
+    
+    .btn-action {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+    }
+    
+    .acciones-buttons {
+        gap: 4px;
+    }
+}
+
+/* FORZAR LAYOUT CORRECTO - CSS AL FINAL PARA MÁXIMA PRIORIDAD */
+/* Asegurar que las stat-cards tengan el layout horizontal correcto */
+.stats-dashboard .stat-card,
+.stats-dashboard a.stat-filter,
+.stats-dashboard a.stat-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    flex-direction: row !important;
+    text-align: center !important;
+    padding: 25px !important;
+}
+
+/* Forzar que los iconos estén a la izquierda */
+.stats-dashboard .stat-icon {
+    flex-shrink: 0 !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.5rem !important;
+    color: white !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    order: 1 !important;
+}
+
+/* Forzar que el contenido esté a la derecha */
+.stats-dashboard .stat-content {
+    text-align: left !important;
+    flex: 1 !important;
+    order: 2 !important;
+}
+
+/* Forzar estilos de números y etiquetas */
+.stats-dashboard .stat-number {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: var(--dark-color) !important;
+    margin-bottom: 5px !important;
+    line-height: 1 !important;
+}
+
+.stats-dashboard .stat-label {
+    color: var(--secondary-color) !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 !important;
+}
+
+/* Asegurar que los iconos tengan sus colores */
+.stats-dashboard .stat-todos .stat-icon {
+    background: linear-gradient(135deg, #6c757d, #5a6268) !important;
+}
+
+.stats-dashboard .stat-pendiente .stat-icon {
+    background: linear-gradient(135deg, var(--estado-pendiente), #e0a800) !important;
+}
+
+.stats-dashboard .stat-en-proceso .stat-icon {
+    background: linear-gradient(135deg, var(--estado-en-proceso), #0056b3) !important;
+}
+
+.stats-dashboard .stat-cerrado .stat-icon {
+    background: linear-gradient(135deg, var(--estado-cerrado), #1e7e34) !important;
+}
+
+/* Asegurar que los iconos sean blancos */
+.stats-dashboard .stat-icon i {
+    color: white !important;
+    font-size: 1.5rem !important;
+}
+
+/* CSS ULTRA ESPECÍFICO PARA FORZAR LAYOUT HORIZONTAL */
+/* Sobrescribir cualquier CSS que esté causando layout vertical */
+.stats-dashboard .stat-card,
+.stats-dashboard a.stat-filter,
+.stats-dashboard a.stat-card,
+.stats-dashboard .stat-card.stat-todos,
+.stats-dashboard .stat-card.stat-pendiente,
+.stats-dashboard .stat-card.stat-en-proceso,
+.stats-dashboard .stat-card.stat-cerrado {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    text-align: center !important;
+    padding: 25px !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Forzar que los iconos estén a la izquierda con order */
+.stats-dashboard .stat-card .stat-icon,
+.stats-dashboard a.stat-filter .stat-icon,
+.stats-dashboard a.stat-card .stat-icon {
+    order: 1 !important;
+    flex-shrink: 0 !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.5rem !important;
+    color: white !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Forzar que el contenido esté a la derecha con order */
+.stats-dashboard .stat-card .stat-content,
+.stats-dashboard a.stat-filter .stat-content,
+.stats-dashboard a.stat-card .stat-content {
+    order: 2 !important;
+    flex: 1 !important;
+    text-align: left !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* CORREGIR COLORES DE ETIQUETAS */
+/* Etiqueta "Todos" - Cambiar a colores más visibles */
+.stats-dashboard .stat-card.stat-todos,
+.stats-dashboard a.stat-filter.stat-todos {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: var(--dark-color) !important;
+}
+
+.stats-dashboard .stat-card.stat-todos .stat-icon,
+.stats-dashboard a.stat-filter.stat-todos .stat-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)) !important;
+}
+
+.stats-dashboard .stat-card.stat-todos .stat-icon i,
+.stats-dashboard a.stat-filter.stat-todos .stat-icon i {
+    color: white !important;
+}
+
+.stats-dashboard .stat-card.stat-todos .stat-number,
+.stats-dashboard a.stat-filter.stat-todos .stat-number {
+    color: var(--dark-color) !important;
+}
+
+.stats-dashboard .stat-card.stat-todos .stat-label,
+.stats-dashboard a.stat-filter.stat-todos .stat-label {
+    color: var(--secondary-color) !important;
+}
+
+/* Unificar colores blancos de las otras etiquetas */
+.stats-dashboard .stat-card.stat-pendiente,
+.stats-dashboard .stat-card.stat-en-proceso,
+.stats-dashboard .stat-card.stat-cerrado,
+.stats-dashboard a.stat-filter.stat-pendiente,
+.stats-dashboard a.stat-filter.stat-en-proceso,
+.stats-dashboard a.stat-filter.stat-cerrado {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: var(--dark-color) !important;
+}
+
+.stats-dashboard .stat-card.stat-pendiente .stat-number,
+.stats-dashboard .stat-card.stat-en-proceso .stat-number,
+.stats-dashboard .stat-card.stat-cerrado .stat-number,
+.stats-dashboard a.stat-filter.stat-pendiente .stat-number,
+.stats-dashboard a.stat-filter.stat-en-proceso .stat-number,
+.stats-dashboard a.stat-filter.stat-cerrado .stat-number {
+    color: var(--dark-color) !important;
+}
+
+.stats-dashboard .stat-card.stat-pendiente .stat-label,
+.stats-dashboard .stat-card.stat-en-proceso .stat-label,
+.stats-dashboard .stat-card.stat-cerrado .stat-label,
+.stats-dashboard a.stat-filter.stat-pendiente .stat-label,
+.stats-dashboard a.stat-filter.stat-en-proceso .stat-label,
+.stats-dashboard a.stat-filter.stat-cerrado .stat-label {
+    color: var(--secondary-color) !important;
+}
+
+/* Estilos para mensajes de alerta */
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideInDown 0.3s ease-out;
+    position: relative;
+}
+
+.alert span {
+    flex: 1;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.alert-close:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-success i {
+    color: var(--success-color);
+    font-size: 1.1rem;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.alert-warning i {
+    color: var(--warning-color);
+    font-size: 1.1rem;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alert-danger i {
+    color: var(--danger-color);
+    font-size: 1.1rem;
+}
+
+/* Animaciones para mensajes */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}

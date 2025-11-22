@@ -1,0 +1,406 @@
+/* ========================================
+   ESTILOS GLOBALES PARA SISTEMA DE TEMAS
+   Aplicar a todas las páginas del sistema
+   ======================================== */
+
+/* Elementos principales que deben usar variables de tema */
+.page-container,
+.container,
+.main-container {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+/* Headers y títulos */
+.header-section,
+.page-header,
+.header-content {
+    background: var(--bg-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+}
+
+.page-title,
+.titulo,
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+.page-subtitle,
+.subtitulo,
+.subtitle {
+    color: var(--text-secondary);
+}
+
+/* Cards y contenedores */
+.card,
+.ticket-card,
+.stat-card,
+.dashboard-card,
+.form-card,
+.info-card,
+.content-card {
+    background: var(--bg-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+}
+
+/* Tablas */
+.table,
+.data-table,
+.tickets-table {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.table th,
+.data-table th,
+.tickets-table th {
+    background: var(--primary-color);
+    color: var(--text-inverse);
+}
+
+.table td,
+.data-table td,
+.tickets-table td {
+    color: var(--text-primary);
+    border-bottom-color: var(--border-light);
+}
+
+.table tr:hover,
+.data-table tr:hover,
+.tickets-table tr:hover {
+    background: var(--bg-secondary);
+}
+
+/* Formularios */
+.form-group input,
+.form-group textarea,
+.form-group select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+    background: var(--bg-primary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.1);
+}
+
+.form-group label,
+label {
+    color: var(--text-primary);
+}
+
+/* Botones */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: var(--text-inverse);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: var(--text-inverse);
+}
+
+.btn-success {
+    background: var(--success-color);
+    color: var(--text-inverse);
+}
+
+.btn-warning {
+    background: var(--warning-color);
+    color: var(--text-inverse);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: var(--text-inverse);
+}
+
+/* Navegación y menús */
+.nav,
+.navbar,
+.menu {
+    background: var(--bg-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--border-light);
+}
+
+.nav-link,
+.menu-item {
+    color: var(--text-primary);
+}
+
+.nav-link:hover,
+.menu-item:hover {
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+}
+
+/* Alertas y mensajes */
+.alert {
+    border-radius: var(--border-radius);
+    backdrop-filter: var(--backdrop-blur);
+}
+
+.alert-success {
+    background: rgba(var(--success-color), 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(var(--success-color), 0.2);
+}
+
+.alert-warning {
+    background: rgba(var(--warning-color), 0.1);
+    color: var(--warning-color);
+    border: 1px solid rgba(var(--warning-color), 0.2);
+}
+
+.alert-danger,
+.alert-error {
+    background: rgba(var(--danger-color), 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(var(--danger-color), 0.2);
+}
+
+.alert-info {
+    background: rgba(var(--info-color), 0.1);
+    color: var(--info-color);
+    border: 1px solid rgba(var(--info-color), 0.2);
+}
+
+/* Estados de tickets */
+.estado-pendiente {
+    background: var(--estado-pendiente-bg);
+    color: var(--estado-pendiente-text);
+}
+
+.estado-abierto {
+    background: var(--estado-abierto-bg);
+    color: var(--estado-abierto-text);
+}
+
+.estado-en-proceso {
+    background: var(--estado-en-proceso-bg);
+    color: var(--estado-en-proceso-text);
+}
+
+.estado-cerrado {
+    background: var(--estado-cerrado-bg);
+    color: var(--estado-cerrado-text);
+}
+
+/* Badges y etiquetas */
+.badge,
+.tag,
+.label {
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
+.badge-primary {
+    background: rgba(var(--primary-color), 0.1);
+    color: var(--primary-color);
+}
+
+.badge-success {
+    background: rgba(var(--success-color), 0.1);
+    color: var(--success-color);
+}
+
+.badge-warning {
+    background: rgba(var(--warning-color), 0.1);
+    color: var(--warning-color);
+}
+
+.badge-danger {
+    background: rgba(var(--danger-color), 0.1);
+    color: var(--danger-color);
+}
+
+/* Paginación */
+.pagination-container {
+    background: var(--bg-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+.pagination-info {
+    color: var(--text-secondary);
+}
+
+.pagination-btn {
+    background: var(--bg-primary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.pagination-btn:hover,
+.pagination-btn.active {
+    background: var(--primary-color);
+    color: var(--text-inverse);
+    border-color: var(--primary-color);
+}
+
+/* Filtros y búsqueda */
+.search-box {
+    background: var(--bg-primary);
+    border-color: var(--border-color);
+}
+
+.search-box input {
+    background: transparent;
+    color: var(--text-primary);
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+.filter-select {
+    background: var(--bg-primary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Sidebar y paneles laterales */
+.sidebar,
+.side-panel {
+    background: var(--bg-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+}
+
+/* Modales y overlays */
+.modal,
+.overlay {
+    background: var(--bg-overlay);
+}
+
+.modal-content,
+.modal-body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+}
+
+/* Tooltips */
+.tooltip {
+    background: rgba(var(--text-primary), 0.9);
+    color: var(--bg-primary);
+}
+
+/* Scrollbars personalizados para temas oscuros */
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+[data-theme="executive"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+[data-theme="executive"] ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+[data-theme="executive"] ::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+[data-theme="executive"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Mejoras para modo alto contraste */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    [data-theme="dark"] {
+        --text-primary: #ffffff;
+        --text-secondary: #ffffff;
+        --border-color: #ffffff;
+    }
+}
+
+/* Responsive para selector de temas */
+@media (max-width: 768px) {
+    .theme-selector {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Animaciones suaves para cambios de tema */
+* {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease,
+                backdrop-filter 0.3s ease;
+}
+
+/* Evitar transiciones en elementos específicos */
+.theme-selector,
+.theme-toggle,
+.toast-notification {
+    transition: transform 0.3s ease, opacity 0.3s ease !important;
+}

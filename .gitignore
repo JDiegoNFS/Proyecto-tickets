@@ -1,0 +1,58 @@
+# Archivos de configuración local
+Tickect/includes/db.php.local
+*.local
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Archivos de backup
+*.bak
+*.backup
+*~
+
+# Archivos subidos por usuarios (opcional - descomentar si no quieres subirlos)
+# Tickect/uploads/*
+# !Tickect/uploads/.gitkeep
+
+# Node modules (si usas npm en el futuro)
+node_modules/
+package-lock.json
+
+# Composer (si usas composer en el futuro)
+vendor/
+composer.lock
+
+# Archivos de Windows
+ehthumbs.db
+Desktop.ini
+
+# Archivos de Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Archivos de Linux
+*~
+.directory
+
+# Logs
+*.log
+logs/
+
+# Archivos de sesión PHP
+sessions/
+tmp/
