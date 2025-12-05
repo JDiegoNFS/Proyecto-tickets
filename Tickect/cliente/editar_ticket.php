@@ -13,7 +13,7 @@ try {
         FROM tickets t
         LEFT JOIN categorias c ON t.categoria_id = c.id
         LEFT JOIN departamentos d ON t.departamento_id = d.id
-        WHERE t.id = ? AND t.usuario_id = ? AND t.estado = 'pendiente'
+        WHERE t.id = ? AND t.cliente_id = ? AND t.estado = 'pendiente'
     ");
     $stmt->execute([$ticket_id, $usuario_id]);
     $ticket = $stmt->fetch();
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt = $pdo->prepare("
                 UPDATE tickets 
                 SET categoria_id = ?, departamento_id = ?, descripcion = ?
-                WHERE id = ? AND usuario_id = ? AND estado = 'pendiente'
+                WHERE id = ? AND cliente_id = ? AND estado = 'pendiente'
             ");
             $stmt->execute([$categoria_id, $departamento_id, $descripcion, $ticket_id, $usuario_id]);
             
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 FROM tickets t
                 LEFT JOIN categorias c ON t.categoria_id = c.id
                 LEFT JOIN departamentos d ON t.departamento_id = d.id
-                WHERE t.id = ? AND t.usuario_id = ? AND t.estado = 'pendiente'
+                WHERE t.id = ? AND t.cliente_id = ? AND t.estado = 'pendiente'
             ");
             $stmt->execute([$ticket_id, $usuario_id]);
             $ticket = $stmt->fetch();

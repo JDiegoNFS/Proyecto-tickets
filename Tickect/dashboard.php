@@ -243,6 +243,10 @@ try {
                 <i class="fas fa-chart-line"></i>
                 <span>Ver Reportes</span>
             </a>
+            <a href="admin/reportes_avanzados.php" class="quick-btn">
+                <i class="fas fa-file-export"></i>
+                <span>Exportar Reportes</span>
+            </a>
             <a href="admin/notificaciones.php" class="quick-btn">
                 <i class="fas fa-bell"></i>
                 <span>Notificaciones</span>
@@ -353,8 +357,11 @@ try {
             </div>
             <h3>Reportes</h3>
             <p>Ver estadísticas y reportes del sistema</p>
-            <a href="admin/reporte.php" class="btn btn-primary">
+            <a href="admin/reporte.php" class="btn btn-primary" style="margin-bottom: 10px;">
                 <i class="fas fa-chart-line"></i> Ver Reportes
+            </a>
+            <a href="admin/reportes_avanzados.php" class="btn btn-success">
+                <i class="fas fa-file-export"></i> Exportar con Filtros
             </a>
         </div>
 

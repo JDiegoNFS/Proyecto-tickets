@@ -9,13 +9,18 @@ if (!isset($_SESSION["usuario_id"]) || $_SESSION["rol"] !== 'admin') {
 
 // Obtener estadísticas por día
 try {
-    // Tickets por día (últimos 7 días)
+    // Debug: Verificar conexión
+    $test = $pdo->query("SELECT COUNT(*) as total FROM tickets");
+    $test_result = $test->fetch();
+    echo "<!-- Debug: Total tickets en BD: " . $test_result['total'] . " -->";
+    
+    // Tickets por día (últimos 30 días o todos si hay pocos)
     $stmt = $pdo->query("
         SELECT DATE(fecha_creacion) as fecha, COUNT(*) as cantidad 
         FROM tickets 
-        WHERE fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
         GROUP BY DATE(fecha_creacion) 
         ORDER BY fecha DESC
+        LIMIT 30
     ");
     $tickets_por_dia = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -52,22 +57,22 @@ try {
     $stmt = $pdo->query("SELECT COUNT(*) as total FROM tickets WHERE estado = 'cerrado'");
     $tickets_cerrados = $stmt->fetch()['total'];
     
-    // Tickets por prioridad
+    // Tickets por estado (en lugar de prioridad)
     $stmt = $pdo->query("
-        SELECT prioridad, COUNT(*) as cantidad 
+        SELECT estado, COUNT(*) as cantidad 
         FROM tickets 
-        GROUP BY prioridad 
+        GROUP BY estado 
         ORDER BY cantidad DESC
     ");
     $tickets_por_prioridad = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Tickets por mes (últimos 6 meses)
+    // Tickets por mes (todos los meses con datos)
     $stmt = $pdo->query("
         SELECT DATE_FORMAT(fecha_creacion, '%Y-%m') as mes, COUNT(*) as cantidad 
         FROM tickets 
-        WHERE fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
         GROUP BY DATE_FORMAT(fecha_creacion, '%Y-%m') 
         ORDER BY mes DESC
+        LIMIT 12
     ");
     $tickets_por_mes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -79,18 +84,17 @@ try {
     ");
     $tiempo_promedio = $stmt->fetch()['tiempo_promedio'] ?? 0;
     
-    // Tickets más activos (con más mensajes)
+    // Tickets más recientes
     $stmt = $pdo->query("
-        SELECT t.id, t.asunto, COUNT(m.id) as mensajes_count 
+        SELECT t.id, SUBSTRING(t.descripcion, 1, 50) as asunto, t.estado
         FROM tickets t 
-        LEFT JOIN mensajes m ON t.id = m.ticket_id 
-        GROUP BY t.id, t.asunto 
-        ORDER BY mensajes_count DESC 
+        ORDER BY t.fecha_creacion DESC 
         LIMIT 5
     ");
     $tickets_mas_activos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
 } catch (Exception $e) {
+    echo "<!-- ERROR: " . $e->getMessage() . " -->";
     $tickets_por_dia = [];
     $tickets_por_categoria = [];
     $tickets_por_departamento = [];
@@ -114,6 +118,42 @@ try {
     <link rel="stylesheet" href="../css/style_admin_dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%) !important;
+            min-height: 100vh;
+        }
+        
+        .page-container {
+            background: transparent !important;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #b0bec5 0%, #90a4ae 100%) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%) !important;
+            border: 1px solid #cfd8dc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .chart-card, .table-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%) !important;
+            border: 1px solid #cfd8dc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .titulo {
+            color: #263238 !important;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+        }
+        
+        .subtitulo {
+            color: #37474f !important;
+        }
+    </style>
 </head>
 <body>
     
@@ -198,7 +238,7 @@ try {
                 <i class="fas fa-chart-line"></i>
             </div>
             <div class="stat-content">
-                <div class="stat-number"><?php echo count($tickets_mas_activos); ?></div>
+                <div class="stat-number"><?php echo ($tickets_pendientes + $tickets_en_proceso); ?></div>
                 <div class="stat-label">Tickets Activos</div>
             </div>
         </div>
@@ -208,7 +248,7 @@ try {
     <div class="charts-grid">
         <!-- Tickets por Día -->
         <div class="chart-card">
-            <h3><i class="fas fa-calendar-day"></i> Tickets por Día (Últimos 7 días)</h3>
+            <h3><i class="fas fa-calendar-day"></i> Tickets por Día (Últimos 30 días)</h3>
             <div class="chart-container">
                 <canvas id="ticketsPorDia"></canvas>
             </div>
@@ -230,9 +270,9 @@ try {
             </div>
         </div>
 
-        <!-- Tickets por Prioridad -->
+        <!-- Tickets por Estado -->
         <div class="chart-card">
-            <h3><i class="fas fa-exclamation-triangle"></i> Tickets por Prioridad</h3>
+            <h3><i class="fas fa-info-circle"></i> Distribución por Estado</h3>
             <div class="chart-container">
                 <canvas id="ticketsPorPrioridad"></canvas>
             </div>
@@ -240,7 +280,7 @@ try {
 
         <!-- Tickets por Mes -->
         <div class="chart-card">
-            <h3><i class="fas fa-calendar-alt"></i> Tickets por Mes (Últimos 6 meses)</h3>
+            <h3><i class="fas fa-calendar-alt"></i> Tickets por Mes (Histórico)</h3>
             <div class="chart-container">
                 <canvas id="ticketsPorMes"></canvas>
             </div>
@@ -295,26 +335,26 @@ try {
             </div>
         </div>
 
-        <!-- Tabla de Tickets por Prioridad -->
+        <!-- Tabla de Tickets por Estado -->
         <div class="table-card">
-            <h3><i class="fas fa-table"></i> Detalle por Prioridad</h3>
+            <h3><i class="fas fa-table"></i> Detalle por Estado</h3>
             <div class="table-container">
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Prioridad</th>
+                            <th>Estado</th>
                             <th>Tickets</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($tickets_por_prioridad as $prioridad): ?>
+                        <?php foreach ($tickets_por_prioridad as $estado_item): ?>
                         <tr>
                             <td>
-                                <span class="priority-badge priority-<?php echo strtolower($prioridad['prioridad']); ?>">
-                                    <?php echo htmlspecialchars($prioridad['prioridad']); ?>
+                                <span class="priority-badge priority-<?php echo strtolower($estado_item['estado']); ?>">
+                                    <?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $estado_item['estado']))); ?>
                                 </span>
                             </td>
-                            <td><?php echo $prioridad['cantidad']; ?></td>
+                            <td><?php echo $estado_item['cantidad']; ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -322,16 +362,16 @@ try {
             </div>
         </div>
 
-        <!-- Tabla de Tickets Más Activos -->
+        <!-- Tabla de Tickets Recientes -->
         <div class="table-card">
-            <h3><i class="fas fa-table"></i> Tickets Más Activos</h3>
+            <h3><i class="fas fa-table"></i> Tickets Recientes</h3>
             <div class="table-container">
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Asunto</th>
-                            <th>Mensajes</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -339,7 +379,11 @@ try {
                         <tr>
                             <td>#<?php echo $ticket['id']; ?></td>
                             <td><?php echo htmlspecialchars($ticket['asunto']); ?></td>
-                            <td><?php echo $ticket['mensajes_count']; ?></td>
+                            <td>
+                                <span class="priority-badge priority-<?php echo strtolower($ticket['estado']); ?>">
+                                    <?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $ticket['estado']))); ?>
+                                </span>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -369,7 +413,7 @@ new Chart(ctxDia, {
         datasets: [{
             label: 'Tickets',
             data: ticketsPorDia.map(item => item.cantidad).reverse(),
-            borderColor: '#4a90e2',
+            borderColor: '#a8b2bfff',
             backgroundColor: 'rgba(74, 144, 226, 0.1)',
             borderWidth: 3,
             fill: true,
@@ -404,7 +448,7 @@ new Chart(ctxCategoria, {
         datasets: [{
             data: ticketsPorCategoria.map(item => item.cantidad),
             backgroundColor: [
-                '#4a90e2',
+                '#89acd3ff',
                 '#f39c12',
                 '#e74c3c',
                 '#27ae60',
@@ -434,8 +478,8 @@ new Chart(ctxDepartamento, {
         datasets: [{
             label: 'Tickets',
             data: ticketsPorDepartamento.map(item => item.cantidad),
-            backgroundColor: '#4a90e2',
-            borderColor: '#357abd',
+            backgroundColor: '#87a3c4ff',
+            borderColor: '#8198aeff',
             borderWidth: 1
         }]
     },
@@ -458,19 +502,19 @@ new Chart(ctxDepartamento, {
     }
 });
 
-// Gráfico de Tickets por Prioridad
+// Gráfico de Tickets por Estado
 const ctxPrioridad = document.getElementById('ticketsPorPrioridad').getContext('2d');
 new Chart(ctxPrioridad, {
     type: 'pie',
     data: {
-        labels: ticketsPorPrioridad.map(item => item.prioridad),
+        labels: ticketsPorPrioridad.map(item => item.estado.replace('_', ' ')),
         datasets: [{
             data: ticketsPorPrioridad.map(item => item.cantidad),
             backgroundColor: [
-                '#e74c3c', // Alta
-                '#f39c12', // Media
-                '#27ae60', // Baja
-                '#3498db'  // Normal
+                '#f39c12', // Pendiente
+                '#3498db', // Abierto
+                '#e74c3c', // En proceso
+                '#27ae60'  // Cerrado
             ]
         }]
     },

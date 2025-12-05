@@ -54,7 +54,11 @@ if (!$usuario) {
     } else {
         $error = "";
 
-        // Usar las funciones de jerarquías para obtener tickets visibles
+        // Obtener total general SIN filtros (para mostrar siempre)
+        $tickets_sin_filtro = obtenerTicketsVisibles($usuario_id, []);
+        $total_tickets_general = $tickets_sin_filtro['total'];
+        
+        // Usar las funciones de jerarquías para obtener tickets visibles CON filtros
         $filtros = [];
         if ($estado_filter) {
             $filtros['estado'] = $estado_filter;
@@ -109,7 +113,7 @@ function getEstadoIcon($estado) {
                 <div class="header-left">
                     <h1 class="page-title">
                         <i class="fas fa-ticket-alt"></i>
-                        Mis Tickets (<?php echo $total_tickets; ?>)
+                        Mis Tickets (<?php echo $total_tickets_general; ?>)
                     </h1>
                     <p class="page-subtitle">Gestiona y da seguimiento a tus solicitudes - <?php echo htmlspecialchars($usuario['nombre'] ?? $usuario['usuario']); ?></p>
                 </div>
